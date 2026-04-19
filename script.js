@@ -18,7 +18,11 @@ function generatePassword() {
     var randomIndex = Math.floor(Math.random() * chars.length);
     password += chars[randomIndex];
   }
-  document.getElementById("password-output").textContent = password;
+  var output = document.getElementById("password-output");
+  output.classList.remove("fade");
+  void output.offsetWidth;
+  output.classList.add("fade");
+  output.textContent = password;
 }
 function copyPassword() {
   var password = document.getElementById("password-output").textContent;
