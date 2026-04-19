@@ -2,7 +2,7 @@ var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var lowercase = "abcdefghijklmnopqrstuvwxyz";
 var numbers = "0123456789";
 var symbols = "!@#$%^&*()_+-=[]{}";
-var history = [];
+var passwordHistory = [];
 function generatePassword() {
   var chars = "";
   if (document.getElementById("uppercase").checked) chars += uppercase;
@@ -28,13 +28,13 @@ function generatePassword() {
   addToHistory(password);
 }
 function addToHistory(password) {
-  history.unshift(password);
-  if (history.length > 5) history.pop();
+  passwordHistory.unshift(password);
+  if (passwordHistory.length > 5) passwordHistory.pop();
   var list = document.getElementById("history-list");
   list.innerHTML = "";
-  for (var i = 0; i < history.length; i++) {
+  for (var i = 0; i < passwordHistory.length; i++) {
     var li = document.createElement("li");
-    li.textContent = history[i];
+    li.textContent = passwordHistory[i];
     li.addEventListener("click", function () {
       navigator.clipboard.writeText(this.textContent);
     });
