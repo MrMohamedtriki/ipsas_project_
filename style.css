@@ -23,7 +23,27 @@ h1 {
   width: 320px;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
+}
+
+#strength-box {
+  width: 352px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+#strength-bar {
+  height: 6px;
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.3s, background 0.3s;
+}
+
+#strength-text {
+  font-size: 13px;
+  min-width: 50px;
 }
 
 #password-output {

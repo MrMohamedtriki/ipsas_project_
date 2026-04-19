@@ -23,6 +23,29 @@ function generatePassword() {
   void output.offsetWidth;
   output.classList.add("fade");
   output.textContent = password;
+  showStrength(length, chars);
+}
+function showStrength(length, chars) {
+  var score = 0;
+  if (length >= 8)  score++;
+  if (length >= 14) score++;
+  if (chars.length > 26) score++;
+  if (chars.length > 60) score++;
+  var bar  = document.getElementById("strength-bar");
+  var text = document.getElementById("strength-text");
+  if (score <= 1) {
+    bar.style.width = "33%";
+    bar.style.background = "#e74c3c";
+    text.textContent = "Weak";
+  } else if (score === 2 || score === 3) {
+    bar.style.width = "66%";
+    bar.style.background = "#f39c12";
+    text.textContent = "Medium";
+  } else {
+    bar.style.width = "100%";
+    bar.style.background = "#2ecc71";
+    text.textContent = "Strong";
+  }
 }
 function copyPassword() {
   var password = document.getElementById("password-output").textContent;
