@@ -15,10 +15,16 @@ button {
   border: 1px solid #888;
   border-radius: 4px;
   background: #eee;
+  transition: background 0.3s ease, transform 0.1s ease;
 }
 
 button:hover {
   background: #7b2b2b;
+  color: white;
+}
+
+button:active {
+  transform: scale(1.45);
 }
 
 input[type="checkbox"] {
@@ -37,6 +43,22 @@ input[type="checkbox"] {
 #history-list {
   padding: 0;
   list-style: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade {
+  animation: fadeIn 0.4s ease-out;
 }
 
 @media (max-width: 600px) {
