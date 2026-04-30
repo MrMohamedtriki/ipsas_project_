@@ -30,6 +30,15 @@ input[type="checkbox"] {
   margin: 15px 0;
 }
 
+#generate-btn {
+  margin-top: 20px;
+}
+
+#history-list {
+  padding: 0;
+  list-style: none;
+}
+
 @media (max-width: 600px) {
   body {
     padding: 20px 15px;

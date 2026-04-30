@@ -14,6 +14,10 @@ function generatePassword() {
     return;
   }
   var length = parseInt(document.getElementById("length").value);
+  if (length < 8 || length > 40) {
+    alert("Password length must be between 8 and 40.");
+    return;
+  }
   var password = "";
   for (var i = 0; i < length; i++) {
     var randomIndex = Math.floor(Math.random() * chars.length);
@@ -29,7 +33,6 @@ function generatePassword() {
 }
 function addToHistory(password) {
   passwordHistory.unshift(password);
-  if (passwordHistory.length > 5) passwordHistory.pop();
   var list = document.getElementById("history-list");
   list.innerHTML = "";
   for (var i = 0; i < passwordHistory.length; i++) {
