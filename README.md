@@ -9,7 +9,7 @@ HTML, CSS, JavaScript
 - Choose length and character types (uppercase, lowercase, numbers, symbols)
 - Password strength indicator (Weak / Medium / Strong)
 - Copy password to clipboard
-- History of last 5 generated passwords
+- History generated passwords
 
 ## GitHub Pages
 https://mrmohamedtriki.github.io/ipsas_project_/
@@ -17,8 +17,9 @@ https://mrmohamedtriki.github.io/ipsas_project_/
 ## What I Learned
 - Using Math.random() to generate passwords
 - DOM manipulation with JavaScript
-- CSS animations and transitions
-
+- CSS 
 ## Difficulties and Solutions
-- Restarting a CSS animation: solved using the offsetWidth trick
-- Keeping the history limited to 5 items: solved using unshift() and pop()
+- Mobile Responsiveness: Solved by adding media queries to stack options vertically on small screens.
+- Input Validation: Implemented both HTML attributes and JavaScript checks to ensure password length stays between 8 and 40.
+- Minimal Styling: Simplified the CSS significantly to maintain a clean and lightweight interface.
+
