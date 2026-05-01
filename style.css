@@ -1,3 +1,4 @@
+/* Main page layout */
 body {
   display: flex;
   flex-direction: column;
@@ -9,11 +10,13 @@ body {
   font-family: sans-serif;
 }
 
+/* Light mode colors */
 body.light-theme {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   color: #222;
 }
 
+/* Global button styling */
 button {
   cursor: pointer;
   padding: 6px 14px;
@@ -45,6 +48,7 @@ input[type="checkbox"] {
   list-style: none;
 }
 
+/* Animation for feedback */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -61,6 +65,46 @@ input[type="checkbox"] {
   animation: fadeIn 0.4s ease-out;
 }
 
+#theme-toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+#crack-time {
+  font-size: 0.95rem;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+
+#clear-btn {
+  display: none;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-color: #c0392b;
+  background: #e74c3c;
+  color: white;
+}
+
+#download-btn {
+  display: none;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-color: #27ae60;
+  background: #2ecc71;
+  color: white;
+}
+
+/* Make it look good on mobile phones */
 @media (max-width: 600px) {
   body {
     padding: 20px 15px;

@@ -1,7 +1,9 @@
+// Available characters
 var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var lowercase = "abcdefghijklmnopqrstuvwxyz";
 var numbers = "0123456789";
 var symbols = "!@#$%^&*()_+-=[]{}";
+// Load history from local storage or start empty
 var passwordHistory = JSON.parse(localStorage.getItem("passwordHistory")) || [];
 
 var savedTheme = localStorage.getItem("theme");
@@ -18,6 +20,7 @@ window.onload = function() {
 
 function generatePassword() {
   var chars = "";
+  // Check which boxes are ticked
   if (document.getElementById("uppercase").checked) chars += uppercase;
   if (document.getElementById("lowercase").checked) chars += lowercase;
   if (document.getElementById("numbers").checked) chars += numbers;
@@ -32,6 +35,7 @@ function generatePassword() {
     return;
   }
   var password = "";
+  // Build the password randomly
   for (var i = 0; i < length; i++) {
     var randomIndex = Math.floor(Math.random() * chars.length);
     password += chars[randomIndex];
@@ -44,12 +48,14 @@ function generatePassword() {
   showCrackTime(length, chars.length);
   addToHistory(password);
 }
+// Add new password to top of history list
 function addToHistory(password) {
   passwordHistory.unshift(password);
   localStorage.setItem("passwordHistory", JSON.stringify(passwordHistory));
   updateHistoryUI();
 }
 
+// Draw the history list on screen
 function updateHistoryUI() {
   var list = document.getElementById("history-list");
   list.innerHTML = "";
@@ -72,6 +78,7 @@ function updateHistoryUI() {
     list.appendChild(li);
   }
 }
+// Guess how long to crack it
 function showCrackTime(length, charsLength) {
   var combinations = Math.pow(charsLength, length);
   var seconds = combinations / 1e11; 
