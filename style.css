@@ -9,6 +9,11 @@ body {
   font-family: sans-serif;
 }
 
+body.light-theme {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #222;
+}
+
 button {
   cursor: pointer;
   padding: 6px 14px;
@@ -29,11 +34,6 @@ button:active {
 
 input[type="checkbox"] {
   cursor: pointer;
-}
-
-#strength-text {
-  display: inline-block;
-  margin: 15px 0;
 }
 
 #generate-btn {
