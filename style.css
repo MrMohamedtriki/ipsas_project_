@@ -1,4 +1,3 @@
-/* Main page layout */
 body {
   display: flex;
   flex-direction: column;
@@ -10,20 +9,16 @@ body {
   font-family: sans-serif;
 }
 
-/* Light mode colors */
 body.light-theme {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  color: #222;
 }
 
-/* Global button styling */
 button {
   cursor: pointer;
   padding: 6px 14px;
   border: 1px solid #888;
   border-radius: 4px;
   background: #eee;
-  transition: background 0.3s ease, transform 0.1s ease;
 }
 
 button:hover {
@@ -48,7 +43,6 @@ input[type="checkbox"] {
   list-style: none;
 }
 
-/* Animation for feedback */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -104,7 +98,6 @@ input[type="checkbox"] {
   color: white;
 }
 
-/* Make it look good on mobile phones */
 @media (max-width: 600px) {
   body {
     padding: 20px 15px;

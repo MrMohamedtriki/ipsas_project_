@@ -1,9 +1,8 @@
-// Available characters
 var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var lowercase = "abcdefghijklmnopqrstuvwxyz";
 var numbers = "0123456789";
 var symbols = "!@#$%^&*()_+-=[]{}";
-// Load history from local storage or start empty
+
 var passwordHistory = JSON.parse(localStorage.getItem("passwordHistory")) || [];
 
 var savedTheme = localStorage.getItem("theme");
@@ -12,7 +11,7 @@ if (savedTheme === "light") {
   document.getElementById("theme-toggle").textContent = "☀️";
 }
 
-window.onload = function() {
+window.onload = function () {
   if (passwordHistory.length > 0) {
     updateHistoryUI();
   }
@@ -20,7 +19,6 @@ window.onload = function() {
 
 function generatePassword() {
   var chars = "";
-  // Check which boxes are ticked
   if (document.getElementById("uppercase").checked) chars += uppercase;
   if (document.getElementById("lowercase").checked) chars += lowercase;
   if (document.getElementById("numbers").checked) chars += numbers;
@@ -35,7 +33,6 @@ function generatePassword() {
     return;
   }
   var password = "";
-  // Build the password randomly
   for (var i = 0; i < length; i++) {
     var randomIndex = Math.floor(Math.random() * chars.length);
     password += chars[randomIndex];
@@ -48,14 +45,28 @@ function generatePassword() {
   showCrackTime(length, chars.length);
   addToHistory(password);
 }
-// Add new password to top of history list
 function addToHistory(password) {
   passwordHistory.unshift(password);
   localStorage.setItem("passwordHistory", JSON.stringify(passwordHistory));
   updateHistoryUI();
+  saveToDatabase(password);
 }
 
-// Draw the history list on screen
+function saveToDatabase(password) {
+  var formData = new FormData();
+  formData.append("password", password);
+  fetch("save_password.php", {
+    method: "POST",
+    body: formData
+  })
+    .then(function (response) { return response.json(); })
+    .then(function (data) {
+      if (data.device_id) {
+        localStorage.setItem("deviceId", data.device_id);
+      }
+    });
+}
+
 function updateHistoryUI() {
   var list = document.getElementById("history-list");
   list.innerHTML = "";
@@ -70,7 +81,7 @@ function updateHistoryUI() {
       this.textContent = "Copied!";
       this.style.color = "#2ecc71";
       var self = this;
-      setTimeout(function() {
+      setTimeout(function () {
         self.textContent = originalText;
         self.style.color = "";
       }, 800);
@@ -78,10 +89,9 @@ function updateHistoryUI() {
     list.appendChild(li);
   }
 }
-// Guess how long to crack it
 function showCrackTime(length, charsLength) {
   var combinations = Math.pow(charsLength, length);
-  var seconds = combinations / 1e11; 
+  var seconds = combinations / 1e11;
   var text = "Instant";
   if (seconds > 31536000) {
     var years = Math.floor(seconds / 31536000);
@@ -112,7 +122,7 @@ function copyPassword() {
 document.getElementById("generate-btn").addEventListener("click", generatePassword);
 document.getElementById("copy-btn").addEventListener("click", copyPassword);
 
-document.getElementById("clear-btn").addEventListener("click", function() {
+document.getElementById("clear-btn").addEventListener("click", function () {
   passwordHistory = [];
   localStorage.removeItem("passwordHistory");
   document.getElementById("history-list").innerHTML = "";
@@ -120,7 +130,21 @@ document.getElementById("clear-btn").addEventListener("click", function() {
   document.getElementById("download-btn").style.display = "none";
 });
 
-document.getElementById("download-btn").addEventListener("click", function() {
+document.getElementById("restore-btn").addEventListener("click", function () {
+  fetch("get_history.php")
+    .then(function (response) { return response.json(); })
+    .then(function (data) {
+      if (data.length === 0) {
+        alert("No passwords found in the database for this device.");
+        return;
+      }
+      passwordHistory = data;
+      localStorage.setItem("passwordHistory", JSON.stringify(passwordHistory));
+      updateHistoryUI();
+    });
+});
+
+document.getElementById("download-btn").addEventListener("click", function () {
   if (passwordHistory.length === 0) return;
   var textToSave = passwordHistory.join("\n");
   var blob = new Blob([textToSave], { type: "text/plain" });
@@ -131,7 +155,7 @@ document.getElementById("download-btn").addEventListener("click", function() {
   URL.revokeObjectURL(a.href);
 });
 
-document.getElementById("theme-toggle").addEventListener("click", function() {
+document.getElementById("theme-toggle").addEventListener("click", function () {
   document.body.classList.toggle("light-theme");
   if (document.body.classList.contains("light-theme")) {
     this.textContent = "☀️";
